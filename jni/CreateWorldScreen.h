@@ -30,6 +30,8 @@ public:
 	TextBox* seedBox; // 284
 	Label* worldNameLabel; // 288
 	Label* seedLabel; // 292
+
+	int _getGameMode();
 };
 
 
@@ -49,13 +51,13 @@ static void CreateWorldScreen$buttonClicked(CreateWorldScreen* scrn, Button* btn
 	}
 
 	if(btn == scrn->createWorldBtn && scrn->seedBox->text != "") {
-		if(scrn->isFlat) FlatLevelSource::DEFAULT_LAYERS = scrn->seedBox->getText();
-	} else FlatLevelSource::DEFAULT_LAYERS = "[7,3,3,2]";
+		if(scrn->isFlat) FlatLevelSource::DEFAULT_LAYERS = scrn->seedBox->text;
+	} else FlatLevelSource::DEFAULT_LAYERS = "[7,3,3,2]"; // Use default layers if layer box is empty
 	_CreateWorldScreen$buttonClicked(scrn, btn);
 }
 
 static int (*_CreateWorldScreen$_getGameMode)(CreateWorldScreen*);
 static int CreateWorldScreen$_getGameMode(CreateWorldScreen* scrn) {
 	// Workaround for Mojang forcing Creative Mode when creating a flat world
-	return scrn->gametype;
+	return scrn->gamemode;
 }
