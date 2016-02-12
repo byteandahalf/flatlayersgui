@@ -30,13 +30,14 @@ static void CreateWorldScreen$_buttonClicked(CreateWorldScreen* self, Button& bu
 			self->gameTypeButtons[0]->isActive = true;
 			self->gameTypeButtons[1]->isActive = true;
 			if(_lastClicked != 2)
-				self->seedBox.setTextboxText(_customLayers);
+				self->seedBox.setText(_customLayers);
 			return;
 
 		case 0:
 		case 1:
-			_customLayers = self->seedBox.getText();
-			self->seedBox.setTextboxText("");
+			if(self->generator == 2)
+				_customLayers = self->seedBox.getText();
+			self->seedBox.setText("");
 			self->seedLabel.setText("Seed");
 			break;
 		}

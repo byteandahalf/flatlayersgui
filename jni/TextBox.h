@@ -8,5 +8,5 @@ struct TextBox
 	std::string text;
 
 	const std::string& getText() const;
-	void setTextboxText(const std::string&);
+	void setText(const std::string&);
 };
