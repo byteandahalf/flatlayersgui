@@ -17,6 +17,8 @@ struct FlatLevelSource
 static void (*_CreateWorldScreen$_buttonClicked)(CreateWorldScreen*, Button&);
 static void CreateWorldScreen$_buttonClicked(CreateWorldScreen* self, Button& button)
 {
+	static std::string _customLayers;
+	static int _lastClicked;
 	int entry;
 	if(self->_isOneOf(button, self->generatorButtons, entry))
 	{
@@ -27,16 +29,22 @@ static void CreateWorldScreen$_buttonClicked(CreateWorldScreen* self, Button& bu
 			self->seedLabel.setText("Superflat layers");
 			self->gameTypeButtons[0]->isActive = true;
 			self->gameTypeButtons[1]->isActive = true;
+			if(_lastClicked != 2)
+				self->seedBox.setTextboxText(_customLayers);
 			return;
 
 		case 0:
 		case 1:
+			_customLayers = self->seedBox.getText();
+			self->seedBox.setTextboxText("");
 			self->seedLabel.setText("Seed");
 			break;
 		}
+
+		_lastClicked = entry;
 	}
 
-	if((uintptr_t)button == (uintptr_t)self->createWorldButton)
+	if(&button == &self->createWorldButton)
 	{
 		FlatLevelSource::DEFAULT_LAYERS = "[7,3,3,2]";
 		if(self->isFlatWorld && self->seedBox.getText() != "")
