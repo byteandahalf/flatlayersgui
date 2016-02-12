@@ -5,7 +5,7 @@
 #include "substrate.h"
 
 #include "CreateWorldScreen.h"
-#include "Button.h"
+#include "ImageButton.h"
 #include "TextBox.h"
 #include "Label.h"
 
@@ -17,27 +17,32 @@ struct FlatLevelSource
 static void (*_CreateWorldScreen$_buttonClicked)(CreateWorldScreen*, Button&);
 static void CreateWorldScreen$_buttonClicked(CreateWorldScreen* self, Button& button)
 {
-	switch(button)
+	int entry;
+	if(self->_isOneOf(button, self->generatorButtons, entry))
 	{
-		case self->generatorButtons[2]:
+		switch(entry)
+		{
+		case 2:
 			_CreateWorldScreen$_buttonClicked(self, button);
-			self->seedLabel->setText("Superflat layers");
+			self->seedLabel.setText("Superflat layers");
 			self->gameTypeButtons[0]->isActive = true;
 			self->gameTypeButtons[1]->isActive = true;
 			return;
 
-		case self->generatorButtons[0]:
-		case self->generatorButtons[1]:
-			self->seedLabel->setText("Seed");
+		case 0:
+		case 1:
+			self->seedLabel.setText("Seed");
 			break;
+		}
+	}
 
-		case self->createWorldButton:
-			FlatLevelSource::DEFAULT_LAYERS = "[7,3,3,2]";
-			if(self->isFlatWorld && self->seedBox->getText() != "")
-			{
-				FlatLevelSource::DEFAULT_LAYERS = self->seedBox->getText();
-			}
-			break;
+	if((uintptr_t)button == (uintptr_t)self->createWorldButton)
+	{
+		FlatLevelSource::DEFAULT_LAYERS = "[7,3,3,2]";
+		if(self->isFlatWorld && self->seedBox.getText() != "")
+		{
+			FlatLevelSource::DEFAULT_LAYERS = self->seedBox.getText();
+		}
 	}
 
 	_CreateWorldScreen$_buttonClicked(self, button);
