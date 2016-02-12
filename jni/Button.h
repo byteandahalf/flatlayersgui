@@ -1,8 +1,7 @@
 #pragma once
 
-class Button {
-public:
-	char filler[64];
-	bool isActive;
-	bool isVisible;
+struct Button {
+	uintptr_t** vtable; // 0
+	bool isActive; // 4
+	bool isVisible; // 5
 };

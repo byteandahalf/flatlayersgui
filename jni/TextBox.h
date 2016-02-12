@@ -2,11 +2,11 @@
 
 #include <string>
 
-class TextBox {
-public:
-	char filler[128];
+struct TextBox
+{
+	char filler[48];
 	std::string text;
 
-	std::string getText() const; // crashes :(
-	void setTextboxText(std::string const&);
+	const std::string& getText() const;
+	void setTextboxText(const std::string&);
 };

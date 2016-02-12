@@ -14,6 +14,8 @@
     <!-- metadata specifying the library name. must match Android.mk.-->
     <meta-data android:name="net.zhuoweizhang.mcpelauncher.api.nativelibname"
         android:value="com.byteandahalf.flatlayersgui"/>
+
+    <meta-data android:name="net.zhuoweizhang.mcpelauncher.api.targetmcpeversion" android:value="0.14.0.b6"/>
     </application>
 
 </manifest> 

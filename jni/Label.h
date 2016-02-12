@@ -2,7 +2,7 @@
 
 #include <string>
 
-class Label {
-public:
-	void setText(std::string);
+struct Label
+{
+	void setText(const std::string&);
 };
