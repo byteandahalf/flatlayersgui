@@ -36,9 +36,11 @@ static void CreateWorldScreen$_buttonClicked(CreateWorldScreen* self, Button& bu
 		case 0:
 		case 1:
 			if(self->generator == 2)
+			{
 				_customLayers = self->seedBox.getText();
-			self->seedBox.setText("");
-			self->seedLabel.setText("Seed");
+				self->seedBox.setText("");
+				self->seedLabel.setText("Seed");
+			}
 			break;
 		}
 
