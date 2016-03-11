@@ -8,6 +8,7 @@
 #include "ImageButton.h"
 #include "TextBox.h"
 #include "Label.h"
+#include "I18n.h"
 
 struct FlatLevelSource
 {
@@ -20,13 +21,14 @@ static void CreateWorldScreen$_buttonClicked(CreateWorldScreen* self, Button& bu
 	static std::string _customLayers;
 	static int _lastClicked;
 	int entry;
+	std::vector<std::string> str_vec;
 	if(self->_isOneOf(button, self->generatorButtons, entry))
 	{
 		switch(entry)
 		{
 		case 2:
 			_CreateWorldScreen$_buttonClicked(self, button);
-			self->seedLabel.setText("Superflat layers");
+			self->seedLabel.setText(I18n::get("createWorld.customize.flat.title",str_vec));
 			self->gameTypeButtons[0]->isActive = true;
 			self->gameTypeButtons[1]->isActive = true;
 			if(_lastClicked != 2)
@@ -39,7 +41,7 @@ static void CreateWorldScreen$_buttonClicked(CreateWorldScreen* self, Button& bu
 			{
 				_customLayers = self->seedBox.getText();
 				self->seedBox.setText("");
-				self->seedLabel.setText("Seed");
+				self->seedLabel.setText(I18n::get("createWorldScreen.levelSeed",str_vec));
 			}
 			break;
 		}
